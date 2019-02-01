@@ -29,9 +29,17 @@ $this->params['breadcrumbs'][] = $this->title;
             'nameNews',
             'annotatio',
             'contentNews:ntext',
-            'files',
-            //'dateNews',
+            'dateNews',
             //'idCategory',
+            [
+                    'format' => 'html',
+                    'label' => 'Image',
+                    'value' => function($data)
+                                {
+                                    return Html::img($data->getImage(), ['width' => 150]);
+                                }
+            ],
+
 
             ['class' => 'yii\grid\ActionColumn'],
         ],
