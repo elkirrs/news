@@ -23,7 +23,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'contentNews') ?>
 
-    <?= $form->field($model, 'files') ?>
+    <?php //$form->field($model, 'files') ?>
 
     <?php // echo $form->field($model, 'dateNews') ?>
 

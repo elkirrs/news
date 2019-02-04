@@ -13,7 +13,7 @@ use Yii;
  * @property string $contentNews
  * @property string $files
  * @property string $dateNews
- * @property int $idCategory
+ * @property int $cat_idCategory
  *
  * @property Commentsnews[] $commentsnews
  * @property Category $category
@@ -34,14 +34,14 @@ class News extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['nameNews', 'annotatio', 'contentNews', 'idCategory'], 'required'],
+            [['nameNews', 'annotatio', 'contentNews', 'cat_idCategory'], 'required'],
             [['contentNews', 'files'], 'string'],
             [['dateNews'], 'date', 'format' => 'php:Y-m-d'],
             [['dateNews'], 'default', 'value' => date('Y-m-d')],
-            [['idCategory'], 'integer'],
+            [['cat_idCategory'], 'integer'],
             [['nameNews'], 'string', 'max' => 500],
             [['annotatio'], 'string', 'max' => 1000],
-            [['idCategory'], 'exist', 'skipOnError' => true, 'targetClass' => Category::className(), 'targetAttribute' => ['idCategory' => 'idcategory']],
+            [['cat_idCategory'], 'exist', 'skipOnError' => true, 'targetClass' => Category::className(), 'targetAttribute' => ['cat_idCategory' => 'idcategory']],
         ];
     }
 
@@ -57,7 +57,7 @@ class News extends \yii\db\ActiveRecord
             'contentNews' => 'Content News',
             'files' => 'Files',
             'dateNews' => 'Date News',
-            'idCategory' => 'Id Category',
+            'cat_idCategory' => 'Id Category',
         ];
     }
 

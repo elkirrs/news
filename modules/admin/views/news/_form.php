@@ -22,7 +22,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'dateNews')->textInput() ?>
 
-    <?= $form->field($model, 'idCategory')->textInput() ?>
+    <?= $form->field($model, 'cat_idCategory')->textInput() ?>
 
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>

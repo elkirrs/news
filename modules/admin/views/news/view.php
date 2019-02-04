@@ -35,7 +35,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'contentNews:ntext',
             'files',
             'dateNews',
-            'idCategory',
+            'cat_idCategory',
         ],
     ]) ?>
 
