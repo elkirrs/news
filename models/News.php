@@ -84,7 +84,7 @@ class News extends \yii\db\ActiveRecord
      */
     public function getImage()
     {
-        return ($this->files) ? '/news/web/uploads/' . $this->files : '/no-image.png';
+        return ($this->files) ? '/news/web/uploads/' . $this->files : '/news/web/no-image.png';
     }
 
     /**
@@ -106,11 +106,11 @@ class News extends \yii\db\ActiveRecord
 //        return $this->hasMany(Commentsnews::className(), ['news_id' => 'id']);
 //    }
 //
-//    /**
-//     * @return \yii\db\ActiveQuery
-//     */
-//    public function getCategory()
-//    {
-//        return $this->hasOne(Category::className(), ['id' => 'category_id']);
-//    }
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getCategory()
+    {
+        return $this->hasOne(Category::className(), ['id' => 'category_id']);
+    }
 }

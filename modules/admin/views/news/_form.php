@@ -1,5 +1,7 @@
 <?php
 
+use app\models\Category;
+use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
@@ -17,12 +19,9 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'annotatio')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'contentNews')->textarea(['rows' => 6]) ?>
-
-    <?= $form->field($model, 'files')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'dateNews')->textInput() ?>
-
-    <?= $form->field($model, 'category_id')->textInput() ?>
+    
+    <?= $form->field($model, "category_id")->dropDownList(Category::find()->select(['nameCategory',
+        'id'])->indexBy('id')->column(),['prompt'=>'Выберите категорию']) ?>
 
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
