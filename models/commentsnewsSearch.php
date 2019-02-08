@@ -18,8 +18,8 @@ class commentsnewsSearch extends commentsnews
     public function rules()
     {
         return [
-            [['idCommentsNews', 'idUsers', 'idNews'], 'integer'],
-            [['dateComments'], 'safe'],
+            [['id', 'news_id', 'users_id'], 'integer'],
+            [['textComments', 'dateComments'], 'safe'],
         ];
     }
 
@@ -59,11 +59,13 @@ class commentsnewsSearch extends commentsnews
 
         // grid filtering conditions
         $query->andFilterWhere([
-            'idCommentsNews' => $this->idCommentsNews,
+            'id' => $this->id,
             'dateComments' => $this->dateComments,
-            'idUsers' => $this->idUsers,
-            'idNews' => $this->idNews,
+            'news_id' => $this->news_id,
+            'users_id' => $this->users_id,
         ]);
+
+        $query->andFilterWhere(['like', 'textComments', $this->textComments]);
 
         return $dataProvider;
     }

@@ -25,21 +25,20 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'idNews',
+            //'id'
             'nameNews',
             'annotatio',
             'contentNews:ntext',
             'dateNews',
-            //'idCategory',
             [
-                    'format' => 'html',
-                    'label' => 'Image',
-                    'value' => function($data)
-                                {
-                                    return Html::img($data->getImage(), ['width' => 150]);
-                                }
+                'format' => 'html',
+                'label' => 'Image',
+                'value' => function($data)
+                {
+                    return Html::img($data->getImage(), ['width' => 150]);
+                }
             ],
-
+            //'category_id',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

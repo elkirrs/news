@@ -18,7 +18,7 @@ class newsSearch extends news
     public function rules()
     {
         return [
-            [['idNews', 'cat_idCategory'], 'integer'],
+            [['id', 'category_id'], 'integer'],
             [['nameNews', 'annotatio', 'contentNews', 'files', 'dateNews'], 'safe'],
         ];
     }
@@ -59,9 +59,9 @@ class newsSearch extends news
 
         // grid filtering conditions
         $query->andFilterWhere([
-            'idNews' => $this->idNews,
+            'id' => $this->id,
             'dateNews' => $this->dateNews,
-            'cat_idCategory' => $this->cat_idCategory,
+            'category_id' => $this->category_id,
         ]);
 
         $query->andFilterWhere(['like', 'nameNews', $this->nameNews])

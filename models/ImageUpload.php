@@ -1,10 +1,5 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: elkirrs
- * Date: 01.02.2019
- * Time: 13:12
- */
+
 
 namespace app\models;
 
@@ -21,7 +16,7 @@ class ImageUpload extends Model
     {
         return [
             [['image'], 'required'],
-            [['image'], 'file', 'skipOnEmpty' => false, 'extensions' => 'png, jpg'],
+            [['image'], 'file', 'extensions' => 'png, jpg'],
         ];
     }
 
@@ -36,7 +31,7 @@ class ImageUpload extends Model
     }
 
 
-    /*
+    /**
      * Уникальная генерация названия картинки
      */
     private function generateFileName()
@@ -45,7 +40,7 @@ class ImageUpload extends Model
     }
 
 
-    /*
+    /**
      * Удаление картинки которая уже существует
      */
     public function deleteCurrentImage($currentImage)
@@ -55,7 +50,7 @@ class ImageUpload extends Model
         }
     }
 
-    /*
+    /**
      * Проверка существования файла
      */
     public function fileExists($currentImage)
@@ -66,7 +61,7 @@ class ImageUpload extends Model
     }
 
 
-    /*
+    /**
      * Метод сохранения картинки
      */
     public function saveImage()

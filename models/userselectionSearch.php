@@ -18,7 +18,7 @@ class userselectionSearch extends userselection
     public function rules()
     {
         return [
-            [['idUserSelection', 'idUsers', 'idCategory'], 'integer'],
+            [['id', 'users_id', 'category_id'], 'integer'],
         ];
     }
 
@@ -58,9 +58,9 @@ class userselectionSearch extends userselection
 
         // grid filtering conditions
         $query->andFilterWhere([
-            'idUserSelection' => $this->idUserSelection,
-            'idUsers' => $this->idUsers,
-            'idCategory' => $this->idCategory,
+            'id' => $this->id,
+            'users_id' => $this->users_id,
+            'category_id' => $this->category_id,
         ]);
 
         return $dataProvider;

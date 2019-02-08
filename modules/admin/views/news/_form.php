@@ -18,11 +18,11 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'contentNews')->textarea(['rows' => 6]) ?>
 
-    <?= $form->field($model, 'files')->textInput() ?>
+    <?= $form->field($model, 'files')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'dateNews')->textInput() ?>
 
-    <?= $form->field($model, 'cat_idCategory')->textInput() ?>
+    <?= $form->field($model, 'category_id')->textInput() ?>
 
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>

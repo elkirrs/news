@@ -15,7 +15,7 @@ use yii\widgets\ActiveForm;
         'method' => 'get',
     ]); ?>
 
-    <?= $form->field($model, 'idNews') ?>
+    <?= $form->field($model, 'id') ?>
 
     <?= $form->field($model, 'nameNews') ?>
 
@@ -23,11 +23,11 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'contentNews') ?>
 
-    <?php //$form->field($model, 'files') ?>
+    <?= $form->field($model, 'files') ?>
 
     <?php // echo $form->field($model, 'dateNews') ?>
 
-    <?php // echo $form->field($model, 'idCategory') ?>
+    <?php // echo $form->field($model, 'category_id') ?>
 
     <div class="form-group">
         <?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>

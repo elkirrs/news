@@ -25,9 +25,10 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'idChatOnline',
+            'id',
+            'textMessage',
             'dateMessage',
-            'idUsers',
+            'users_id',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

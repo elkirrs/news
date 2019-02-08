@@ -7,7 +7,7 @@ use Yii;
 /**
  * This is the model class for table "category".
  *
- * @property int $idCategory
+ * @property int $id
  * @property string $nameCategory
  *
  * @property News[] $news
@@ -40,7 +40,7 @@ class Category extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'idCategory' => 'Id Category',
+            'id' => 'ID',
             'nameCategory' => 'Name Category',
         ];
     }
@@ -50,7 +50,7 @@ class Category extends \yii\db\ActiveRecord
      */
     public function getNews()
     {
-        return $this->hasMany(News::className(), ['idCategory' => 'idcategory']);
+        return $this->hasMany(News::className(), ['category_id' => 'id']);
     }
 
     /**
@@ -58,6 +58,6 @@ class Category extends \yii\db\ActiveRecord
      */
     public function getUserselections()
     {
-        return $this->hasMany(Userselection::className(), ['idCategory' => 'idcategory']);
+        return $this->hasMany(Userselection::className(), ['category_id' => 'id']);
     }
 }

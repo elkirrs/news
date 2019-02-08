@@ -7,13 +7,13 @@ use Yii;
 /**
  * This is the model class for table "news".
  *
- * @property int $idNews
+ * @property int $id
  * @property string $nameNews
  * @property string $annotatio
  * @property string $contentNews
  * @property string $files
  * @property string $dateNews
- * @property int $cat_idCategory
+ * @property int $category_id
  *
  * @property Commentsnews[] $commentsnews
  * @property Category $category
@@ -34,14 +34,15 @@ class News extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['nameNews', 'annotatio', 'contentNews', 'cat_idCategory'], 'required'],
-            [['contentNews', 'files'], 'string'],
+            [['nameNews', 'annotatio', 'contentNews'], 'required'],
+            [['contentNews'], 'string'],
+            [['dateNews'], 'safe'],
             [['dateNews'], 'date', 'format' => 'php:Y-m-d'],
             [['dateNews'], 'default', 'value' => date('Y-m-d')],
-            [['cat_idCategory'], 'integer'],
+            [['category_id'], 'integer'],
             [['nameNews'], 'string', 'max' => 500],
-            [['annotatio'], 'string', 'max' => 1000],
-            [['cat_idCategory'], 'exist', 'skipOnError' => true, 'targetClass' => Category::className(), 'targetAttribute' => ['cat_idCategory' => 'idcategory']],
+            [['annotatio', 'files'], 'string', 'max' => 1000],
+            [['category_id'], 'exist', 'skipOnError' => true, 'targetClass' => Category::className(), 'targetAttribute' => ['category_id' => 'id']],
         ];
     }
 
@@ -51,15 +52,16 @@ class News extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'idNews' => 'Id News',
+            'id' => 'ID',
             'nameNews' => 'Name News',
             'annotatio' => 'Annotatio',
             'contentNews' => 'Content News',
             'files' => 'Files',
             'dateNews' => 'Date News',
-            'cat_idCategory' => 'Id Category',
+            'category_id' => 'Category ID',
         ];
     }
+
 
     public function saveImage($filename)
     {
@@ -67,7 +69,7 @@ class News extends \yii\db\ActiveRecord
         return $this->save(false);
     }
 
-    /*
+    /**
      * Удаление картинки если вся статья удалена
      */
     public function deleteImage()
@@ -77,15 +79,15 @@ class News extends \yii\db\ActiveRecord
     }
 
 
-    /*
+    /**
      * Отображает картинку в листенге админа
      */
     public function getImage()
     {
-        return ($this->files) ? 'uploads/' . $this->files : 'no-image.png';
+        return ($this->files) ? '/news/web/uploads/' . $this->files : '/no-image.png';
     }
 
-    /*
+    /**
      * Вызов метода автоматческого удаления файла при удалении статьи
      */
     public function beforeDelete()
@@ -95,19 +97,20 @@ class News extends \yii\db\ActiveRecord
     }
 
 
+
 //    /**
 //     * @return \yii\db\ActiveQuery
 //     */
 //    public function getCommentsnews()
 //    {
-//        return $this->hasMany(Commentsnews::className(), ['idNews' => 'idnews']);
+//        return $this->hasMany(Commentsnews::className(), ['news_id' => 'id']);
 //    }
 //
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getCategory()
-    {
-        return $this->hasOne(Category::className(), ['idcategory' => 'idCategory']);
-    }
+//    /**
+//     * @return \yii\db\ActiveQuery
+//     */
+//    public function getCategory()
+//    {
+//        return $this->hasOne(Category::className(), ['id' => 'category_id']);
+//    }
 }

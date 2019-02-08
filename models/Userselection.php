@@ -7,9 +7,9 @@ use Yii;
 /**
  * This is the model class for table "userselection".
  *
- * @property int $idUserSelection
- * @property int $idUsers
- * @property int $idCategory
+ * @property int $id
+ * @property int $users_id
+ * @property int $category_id
  *
  * @property Category $category
  * @property Users $users
@@ -30,10 +30,10 @@ class Userselection extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['idUsers', 'idCategory'], 'required'],
-            [['idUsers', 'idCategory'], 'integer'],
-            [['idCategory'], 'exist', 'skipOnError' => true, 'targetClass' => Category::className(), 'targetAttribute' => ['idCategory' => 'idcategory']],
-            [['idUsers'], 'exist', 'skipOnError' => true, 'targetClass' => Users::className(), 'targetAttribute' => ['idUsers' => 'idusers']],
+            [['users_id', 'category_id'], 'required'],
+            [['users_id', 'category_id'], 'integer'],
+            [['category_id'], 'exist', 'skipOnError' => true, 'targetClass' => Category::className(), 'targetAttribute' => ['category_id' => 'id']],
+            [['users_id'], 'exist', 'skipOnError' => true, 'targetClass' => Users::className(), 'targetAttribute' => ['users_id' => 'id']],
         ];
     }
 
@@ -43,9 +43,9 @@ class Userselection extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'idUserSelection' => 'Id User Selection',
-            'idUsers' => 'Id Users',
-            'idCategory' => 'Id Category',
+            'id' => 'ID',
+            'users_id' => 'Users ID',
+            'category_id' => 'Category ID',
         ];
     }
 
@@ -54,7 +54,7 @@ class Userselection extends \yii\db\ActiveRecord
      */
     public function getCategory()
     {
-        return $this->hasOne(Category::className(), ['idcategory' => 'idCategory']);
+        return $this->hasOne(Category::className(), ['id' => 'category_id']);
     }
 
     /**
@@ -62,6 +62,6 @@ class Userselection extends \yii\db\ActiveRecord
      */
     public function getUsers()
     {
-        return $this->hasOne(Users::className(), ['idusers' => 'idUsers']);
+        return $this->hasOne(Users::className(), ['id' => 'users_id']);
     }
 }

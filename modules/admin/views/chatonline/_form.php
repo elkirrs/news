@@ -12,9 +12,11 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
+    <?= $form->field($model, 'textMessage')->textInput(['maxlength' => true]) ?>
+
     <?= $form->field($model, 'dateMessage')->textInput() ?>
 
-    <?= $form->field($model, 'idUsers')->textInput() ?>
+    <?= $form->field($model, 'users_id')->textInput() ?>
 
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>

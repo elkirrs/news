@@ -38,15 +38,13 @@ AppAsset::register($this);
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-right'],
         'items' => [
-            ['label' => 'admin', 'url' => ['/admin/default/index']],
-            ['label' => 'Пользователи', 'url' => ['/admin/users/index']],
-            ['label' => 'Новости', 'url' => ['/admin/news/index']],
-            ['label' => 'Категории', 'url' => ['/admin/category/index']],
-            ['label' => 'Коментарии', 'url' => ['/admin/commentstext/index']],
-            ['label' => 'Чат', 'url' => ['/admin/chatmessage/index']],
-            ['label' => 'Commentsnews', 'url' => ['/admin/commentsnews/index']],
-            ['label' => 'Chatonline', 'url' => ['/admin/chatonline/index']],
-            ['label' => 'Userselection', 'url' => ['/admin/userselection/index']],
+            ['label' => 'admin', 'url' => ['default/index']],
+            ['label' => 'Пользователи', 'url' => ['users/index']],
+            ['label' => 'Новости', 'url' => ['news/index']],
+            ['label' => 'Категории', 'url' => ['category/index']],
+            ['label' => 'Комментарии', 'url' => ['commentsnews/index']],
+            ['label' => 'Чат', 'url' => ['chatonline/index']],
+            ['label' => 'Выбор', 'url' => ['userselection/index']],
             Yii::$app->user->isGuest ? (
             ['label' => 'Login', 'url' => ['/site/login']]
             ) : (
@@ -63,7 +61,6 @@ AppAsset::register($this);
     ]);
     NavBar::end();
     ?>
-
 
     <div class="container">
         <?= Breadcrumbs::widget([

@@ -18,8 +18,8 @@ class chatonlineSearch extends chatonline
     public function rules()
     {
         return [
-            [['idChatOnline', 'idUsers'], 'integer'],
-            [['dateMessage'], 'safe'],
+            [['id', 'users_id'], 'integer'],
+            [['textMessage', 'dateMessage'], 'safe'],
         ];
     }
 
@@ -59,10 +59,12 @@ class chatonlineSearch extends chatonline
 
         // grid filtering conditions
         $query->andFilterWhere([
-            'idChatOnline' => $this->idChatOnline,
+            'id' => $this->id,
             'dateMessage' => $this->dateMessage,
-            'idUsers' => $this->idUsers,
+            'users_id' => $this->users_id,
         ]);
+
+        $query->andFilterWhere(['like', 'textMessage', $this->textMessage]);
 
         return $dataProvider;
     }

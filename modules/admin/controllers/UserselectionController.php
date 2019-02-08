@@ -67,7 +67,7 @@ class UserselectionController extends Controller
         $model = new userselection();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->idUserSelection]);
+            return $this->redirect(['view', 'id' => $model->id]);
         }
 
         return $this->render('create', [
@@ -87,7 +87,7 @@ class UserselectionController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->idUserSelection]);
+            return $this->redirect(['view', 'id' => $model->id]);
         }
 
         return $this->render('update', [

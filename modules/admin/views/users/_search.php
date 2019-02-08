@@ -15,7 +15,7 @@ use yii\widgets\ActiveForm;
         'method' => 'get',
     ]); ?>
 
-    <?= $form->field($model, 'idUsers') ?>
+    <?= $form->field($model, 'id') ?>
 
     <?= $form->field($model, 'name') ?>
 
@@ -26,6 +26,12 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'email') ?>
 
     <?php // echo $form->field($model, 'nickname') ?>
+
+    <?php // echo $form->field($model, 'password') ?>
+
+    <?php // echo $form->field($model, 'isAdmin') ?>
+
+    <?php // echo $form->field($model, 'photo') ?>
 
     <div class="form-group">
         <?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>

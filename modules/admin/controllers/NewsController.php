@@ -2,12 +2,14 @@
 
 namespace app\modules\admin\controllers;
 
+use app\models\ImageUpload;
 use Yii;
 use app\models\news;
 use app\models\newsSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\web\UploadedFile;
 
 /**
  * NewsController implements the CRUD actions for news model.
@@ -67,7 +69,7 @@ class NewsController extends Controller
         $model = new news();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->idNews]);
+            return $this->redirect(['view', 'id' => $model->id]);
         }
 
         return $this->render('create', [
@@ -87,7 +89,7 @@ class NewsController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->idNews]);
+            return $this->redirect(['view', 'id' => $model->id]);
         }
 
         return $this->render('update', [
@@ -125,6 +127,7 @@ class NewsController extends Controller
         throw new NotFoundHttpException('The requested page does not exist.');
     }
 
+
     public function actionSetImage($id)
     {
         $model = new ImageUpload;
@@ -134,7 +137,7 @@ class NewsController extends Controller
             $news = $this->findModel($id);
             $file = UploadedFile::getInstance($model, 'image');
             if ($news->saveImage($model->uploadFile($file, $news->files))){
-                return $this->redirect(['view', 'id' => $news->idNews]);
+                return $this->redirect(['view', 'id' => $news->id]);
             }
         }
         return $this->render('image', ['model' => $model]);

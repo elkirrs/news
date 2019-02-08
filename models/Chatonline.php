@@ -7,11 +7,11 @@ use Yii;
 /**
  * This is the model class for table "chatonline".
  *
- * @property int $idChatOnline
+ * @property int $id
+ * @property string $textMessage
  * @property string $dateMessage
- * @property int $idUsers
+ * @property int $users_id
  *
- * @property Chatmessage[] $chatmessages
  * @property Users $users
  */
 class Chatonline extends \yii\db\ActiveRecord
@@ -30,10 +30,11 @@ class Chatonline extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['dateMessage', 'idUsers'], 'required'],
+            [['textMessage', 'dateMessage', 'users_id'], 'required'],
             [['dateMessage'], 'safe'],
-            [['idUsers'], 'integer'],
-            [['idUsers'], 'exist', 'skipOnError' => true, 'targetClass' => Users::className(), 'targetAttribute' => ['idUsers' => 'idusers']],
+            [['users_id'], 'integer'],
+            [['textMessage'], 'string', 'max' => 1000],
+            [['users_id'], 'exist', 'skipOnError' => true, 'targetClass' => Users::className(), 'targetAttribute' => ['users_id' => 'id']],
         ];
     }
 
@@ -43,18 +44,11 @@ class Chatonline extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'idChatOnline' => 'Id Chat Online',
+            'id' => 'ID',
+            'textMessage' => 'Text Message',
             'dateMessage' => 'Date Message',
-            'idUsers' => 'Id Users',
+            'users_id' => 'Users ID',
         ];
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getChatmessages()
-    {
-        return $this->hasMany(Chatmessage::className(), ['idChatOnline' => 'idchatonline']);
     }
 
     /**
@@ -62,6 +56,6 @@ class Chatonline extends \yii\db\ActiveRecord
      */
     public function getUsers()
     {
-        return $this->hasOne(Users::className(), ['idusers' => 'idUsers']);
+        return $this->hasOne(Users::className(), ['id' => 'users_id']);
     }
 }

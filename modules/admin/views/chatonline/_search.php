@@ -15,11 +15,13 @@ use yii\widgets\ActiveForm;
         'method' => 'get',
     ]); ?>
 
-    <?= $form->field($model, 'idChatOnline') ?>
+    <?= $form->field($model, 'id') ?>
+
+    <?= $form->field($model, 'textMessage') ?>
 
     <?= $form->field($model, 'dateMessage') ?>
 
-    <?= $form->field($model, 'idUsers') ?>
+    <?= $form->field($model, 'users_id') ?>
 
     <div class="form-group">
         <?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>

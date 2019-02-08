@@ -7,7 +7,7 @@ use yii\helpers\Html;
 
 $this->title = 'Update Chatonline: {nameAttribute}';
 $this->params['breadcrumbs'][] = ['label' => 'Chatonlines', 'url' => ['index']];
-$this->params['breadcrumbs'][] = ['label' => $model->idChatOnline, 'url' => ['view', 'id' => $model->idChatOnline]];
+$this->params['breadcrumbs'][] = ['label' => $model->id, 'url' => ['view', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = 'Update';
 ?>
 <div class="chatonline-update">

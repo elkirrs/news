@@ -12,7 +12,6 @@ class Module extends \yii\base\Module
      */
 
     public $layout = '/admin';
-
     public $controllerNamespace = 'app\modules\admin\controllers';
 
     /**

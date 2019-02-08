@@ -67,7 +67,7 @@ class ChatonlineController extends Controller
         $model = new chatonline();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->idChatOnline]);
+            return $this->redirect(['view', 'id' => $model->id]);
         }
 
         return $this->render('create', [
@@ -87,7 +87,7 @@ class ChatonlineController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->idChatOnline]);
+            return $this->redirect(['view', 'id' => $model->id]);
         }
 
         return $this->render('update', [

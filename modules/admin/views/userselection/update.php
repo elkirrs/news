@@ -7,7 +7,7 @@ use yii\helpers\Html;
 
 $this->title = 'Update Userselection: {nameAttribute}';
 $this->params['breadcrumbs'][] = ['label' => 'Userselections', 'url' => ['index']];
-$this->params['breadcrumbs'][] = ['label' => $model->idUserSelection, 'url' => ['view', 'id' => $model->idUserSelection]];
+$this->params['breadcrumbs'][] = ['label' => $model->id, 'url' => ['view', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = 'Update';
 ?>
 <div class="userselection-update">

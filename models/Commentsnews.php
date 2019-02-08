@@ -7,14 +7,14 @@ use Yii;
 /**
  * This is the model class for table "commentsnews".
  *
- * @property int $idCommentsNews
+ * @property int $id
+ * @property string $textComments
  * @property string $dateComments
- * @property int $idUsers
- * @property int $idNews
+ * @property int $news_id
+ * @property int $users_id
  *
  * @property News $news
  * @property Users $users
- * @property Commentstext[] $commentstexts
  */
 class Commentsnews extends \yii\db\ActiveRecord
 {
@@ -32,11 +32,12 @@ class Commentsnews extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['dateComments', 'idUsers', 'idNews'], 'required'],
+            [['textComments', 'dateComments', 'news_id', 'users_id'], 'required'],
             [['dateComments'], 'safe'],
-            [['idUsers', 'idNews'], 'integer'],
-            [['idNews'], 'exist', 'skipOnError' => true, 'targetClass' => News::className(), 'targetAttribute' => ['idNews' => 'idnews']],
-            [['idUsers'], 'exist', 'skipOnError' => true, 'targetClass' => Users::className(), 'targetAttribute' => ['idUsers' => 'idusers']],
+            [['news_id', 'users_id'], 'integer'],
+            [['textComments'], 'string', 'max' => 1000],
+            [['news_id'], 'exist', 'skipOnError' => true, 'targetClass' => News::className(), 'targetAttribute' => ['news_id' => 'id']],
+            [['users_id'], 'exist', 'skipOnError' => true, 'targetClass' => Users::className(), 'targetAttribute' => ['users_id' => 'id']],
         ];
     }
 
@@ -46,10 +47,11 @@ class Commentsnews extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'idCommentsNews' => 'Id Comments News',
+            'id' => 'ID',
+            'textComments' => 'Text Comments',
             'dateComments' => 'Date Comments',
-            'idUsers' => 'Id Users',
-            'idNews' => 'Id News',
+            'news_id' => 'News ID',
+            'users_id' => 'Users ID',
         ];
     }
 
@@ -58,7 +60,7 @@ class Commentsnews extends \yii\db\ActiveRecord
      */
     public function getNews()
     {
-        return $this->hasOne(News::className(), ['idnews' => 'idNews']);
+        return $this->hasOne(News::className(), ['id' => 'news_id']);
     }
 
     /**
@@ -66,14 +68,6 @@ class Commentsnews extends \yii\db\ActiveRecord
      */
     public function getUsers()
     {
-        return $this->hasOne(Users::className(), ['idusers' => 'idUsers']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getCommentstexts()
-    {
-        return $this->hasMany(Commentstext::className(), ['idCommentsNews' => 'idcommentsnews']);
+        return $this->hasOne(Users::className(), ['id' => 'users_id']);
     }
 }
