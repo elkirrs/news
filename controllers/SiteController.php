@@ -2,7 +2,11 @@
 
 namespace app\controllers;
 
+use app\models\Category;
+use app\models\categorySearch;
+use app\models\News;
 use Yii;
+use yii\data\Pagination;
 use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\Response;
@@ -61,6 +65,23 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
+
+        $query = News::find();
+        $countQuery = clone $query;
+        $pages = new Pagination(['totalCount' => $countQuery->count(), 'pageSize' => 11]);
+        $news = $query->offset($pages->offset)
+            ->limit($pages->limit)
+            ->all();
+
+        $categories = Category::find()->all();
+
+        return $this->render('index', [
+            'news' => $news,
+            'pages' => $pages,
+            'categories' => $categories,
+        ]);
+
+
         return $this->render('index');
     }
 
@@ -125,4 +146,28 @@ class SiteController extends Controller
     {
         return $this->render('about');
     }
+
+
+    public function actionSingle($id)
+    {
+
+        $news = News::findOne($id);
+        return $this->render('single',[
+            'news' => $news,
+        ]);
+    }
+
+    public function actionCategory()
+    {
+        return $this->render('category');
+    }
+
+    /**
+     * Страница регистрации
+     */
+    public function actionRegistration()
+    {
+        return $this->render('registration');
+    }
+
 }

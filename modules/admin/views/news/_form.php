@@ -19,7 +19,7 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'annotatio')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'contentNews')->textarea(['rows' => 6]) ?>
-    
+
     <?= $form->field($model, "category_id")->dropDownList(Category::find()->select(['nameCategory',
         'id'])->indexBy('id')->column(),['prompt'=>'Выберите категорию']) ?>
 

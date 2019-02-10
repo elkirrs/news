@@ -2,52 +2,63 @@
 
 /* @var $this yii\web\View */
 
-$this->title = 'My Yii Application';
+use yii\helpers\Url;
+use yii\widgets\LinkPager;
+
+$this->title = 'News Blog';
 ?>
-<div class="site-index">
 
-    <div class="jumbotron">
-        <h1>Congratulations!</h1>
-
-        <p class="lead">You have successfully created your Yii-powered application.</p>
-
-        <p><a class="btn btn-lg btn-success" href="http://www.yiiframework.com">Get started with Yii</a></p>
-    </div>
-
-    <div class="body-content">
-
+<div class="container">
+    <main role="main" class="container">
         <div class="row">
-            <div class="col-lg-4">
-                <h2>Heading</h2>
+            <div class="col-md-8 blog-main">
 
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                    fugiat nulla pariatur.</p>
+                    <?php foreach ($news as $new):?>
+                    <div class="blog-post">
+                        <div class="col-md-12">
+                            <div class="card flex-md-row mb-3 shadow-sm h-md-250">
+                                <div class="card-body d-flex flex-column align-items-start">
+                                    <strong class="d-inline-block mb-2 text-primary"><?= $new->category->nameCategory;?></strong>
+                                    <h3 class="mb-0">
+                                        <a class="text-dark" href="<?= Url::toRoute(['site/single', 'id' => $new->id]);?>"><?= $new->nameNews;?></a>
+                                    </h3>
+                                    <div class="mb-1 text-muted"><?= $new->dateNews ?></div>
+                                    <p class="card-text mb-auto"><?= $new->annotatio;?></p>
+                                    <a href="<?= Url::toRoute(['site/single', 'id' => $new->id]);?>">Подробнее</a>
+                                </div>
+                                <img src=" <?= $new->getImage();?>"  width="290" height="250" alt="">
+                            </div>
+                        </div>
+                </div><!-- /.blog-post -->
+                    <?php endforeach; ?>
 
-                <p><a class="btn btn-default" href="http://www.yiiframework.com/doc/">Yii Documentation &raquo;</a></p>
+
+                        <?php echo LinkPager::widget([
+                            'pagination' => $pages,
+                        ])?>
+
+
+
             </div>
-            <div class="col-lg-4">
-                <h2>Heading</h2>
+            <aside class="col-md-3 blog-sidebar">
+                <div class="p-3 mb-3 bg-light rounded">
+                    <h4 class="font-italic">About</h4>
+                    <p class="mb-0">Etiam porta <em>sem malesuada magna</em> mollis euismod. Cras mattis consectetur purus sit amet fermentum. Aenean lacinia bibendum nulla sed consectetur.</p>
+                </div>
 
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                    fugiat nulla pariatur.</p>
+                <div class="p-3">
+                    <h4 class="font-italic">Категории</h4>
+                    <ul>
+                        <?php foreach ($categories as $category):?>
+                        <li>
+                            <a href="#"><?=$category->nameCategory ;?></a>
+                            <span class="post-count pull-right"> (<?= $category->getNews()->count();?>)</span>
+                        </li>
+                        <?php endforeach; ?>
 
-                <p><a class="btn btn-default" href="http://www.yiiframework.com/forum/">Yii Forum &raquo;</a></p>
-            </div>
-            <div class="col-lg-4">
-                <h2>Heading</h2>
-
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                    fugiat nulla pariatur.</p>
-
-                <p><a class="btn btn-default" href="http://www.yiiframework.com/extensions/">Yii Extensions &raquo;</a></p>
-            </div>
-        </div>
-
-    </div>
+                    </ul>
+                </div>
+            </aside><!-- /.blog-sidebar -->
+        </div><!-- /.row -->
+    </main><!-- /.container -->
 </div>
