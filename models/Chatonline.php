@@ -12,7 +12,7 @@ use Yii;
  * @property string $dateMessage
  * @property int $users_id
  *
- * @property Users $users
+ * @property User $users
  */
 class Chatonline extends \yii\db\ActiveRecord
 {
@@ -34,7 +34,7 @@ class Chatonline extends \yii\db\ActiveRecord
             [['dateMessage'], 'safe'],
             [['users_id'], 'integer'],
             [['textMessage'], 'string', 'max' => 1000],
-            [['users_id'], 'exist', 'skipOnError' => true, 'targetClass' => Users::className(), 'targetAttribute' => ['users_id' => 'id']],
+            [['users_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['users_id' => 'id']],
         ];
     }
 
@@ -56,6 +56,6 @@ class Chatonline extends \yii\db\ActiveRecord
      */
     public function getUsers()
     {
-        return $this->hasOne(Users::className(), ['id' => 'users_id']);
+        return $this->hasOne(User::className(), ['id' => 'users_id']);
     }
 }

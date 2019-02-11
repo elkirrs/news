@@ -39,7 +39,7 @@ AppAsset::register($this);
         'options' => ['class' => 'navbar-nav navbar-right'],
         'items' => [
             ['label' => 'admin', 'url' => ['default/index']],
-            ['label' => 'Пользователи', 'url' => ['users/index']],
+            ['label' => 'Пользователи', 'url' => ['user/index']],
             ['label' => 'Новости', 'url' => ['news/index']],
             ['label' => 'Категории', 'url' => ['category/index']],
             ['label' => 'Комментарии', 'url' => ['commentsnews/index']],

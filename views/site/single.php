@@ -5,7 +5,7 @@
 use yii\helpers\Html;
 use yii\helpers\Url;
 
-$this->title = 'НОвость';
+$this->title = 'Новость';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
@@ -25,26 +25,21 @@ $this->params['breadcrumbs'][] = $this->title;
                         </div>
                     </div>
                 </div><!-- /.blog-post -->
-                <div class="blog-post">
-                    <div class="col-md-12">
-                        <div class="card">
-                            <div class="card-header">
-                                <h6 class="card-title">Коментарии:</h6>
-                            </div>
-                            <div class="card-body">
-                                <p><b>Login</b></p>
-                                <p>Текст комментария </p>
-                                <p><b>Login</b></p>
-                                <p>Текст комментария Текст комментария Текст комментария Текст комментария Текст комментария Текст комментария</p>
-                                <div class="form-group">
-                                    <label for="exampleFormControlTextarea1">Введите текст комментария</label>
-                                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-                                </div>
-                                <button type="button" class="btn btn-secondary btn-sm">Small button</button>
+                <div class="leave-comment"><!--leave comment-->
+                    <h4>Leave a reply</h4>
+
+
+                    <form class="form-horizontal contact-form" role="form" method="post" action="#">
+
+                        <div class="form-group">
+                            <div class="col-md-12">
+										<textarea class="form-control" rows="6" name="message"
+                                                  placeholder="Write Massage"></textarea>
                             </div>
                         </div>
-                    </div>
-                </div><!-- /.blog-post -->
+                        <a href="#" class="btn btn-secondary btm-sm">Post Comment</a>
+                    </form>
+                </div><!--end leave comment-->
             </div><!-- /.blog-main -->
 
             <aside class="col-md-4 blog-sidebar">

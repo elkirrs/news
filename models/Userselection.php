@@ -12,7 +12,7 @@ use Yii;
  * @property int $category_id
  *
  * @property Category $category
- * @property Users $users
+ * @property User $users
  */
 class Userselection extends \yii\db\ActiveRecord
 {
@@ -33,7 +33,7 @@ class Userselection extends \yii\db\ActiveRecord
             [['users_id', 'category_id'], 'required'],
             [['users_id', 'category_id'], 'integer'],
             [['category_id'], 'exist', 'skipOnError' => true, 'targetClass' => Category::className(), 'targetAttribute' => ['category_id' => 'id']],
-            [['users_id'], 'exist', 'skipOnError' => true, 'targetClass' => Users::className(), 'targetAttribute' => ['users_id' => 'id']],
+            [['users_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['users_id' => 'id']],
         ];
     }
 
@@ -62,6 +62,6 @@ class Userselection extends \yii\db\ActiveRecord
      */
     public function getUsers()
     {
-        return $this->hasOne(Users::className(), ['id' => 'users_id']);
+        return $this->hasOne(User::className(), ['id' => 'users_id']);
     }
 }

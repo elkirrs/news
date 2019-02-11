@@ -3,16 +3,16 @@
 namespace app\modules\admin\controllers;
 
 use Yii;
-use app\models\users;
-use app\models\usersSearch;
+use app\models\user;
+use app\models\userSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * UsersController implements the CRUD actions for users model.
+ * UserController implements the CRUD actions for user model.
  */
-class UsersController extends Controller
+class UserController extends Controller
 {
     /**
      * @inheritdoc
@@ -30,12 +30,12 @@ class UsersController extends Controller
     }
 
     /**
-     * Lists all users models.
+     * Lists all user models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new usersSearch();
+        $searchModel = new userSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -45,7 +45,7 @@ class UsersController extends Controller
     }
 
     /**
-     * Displays a single users model.
+     * Displays a single user model.
      * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
@@ -58,13 +58,13 @@ class UsersController extends Controller
     }
 
     /**
-     * Creates a new users model.
+     * Creates a new user model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new users();
+        $model = new user();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -76,7 +76,7 @@ class UsersController extends Controller
     }
 
     /**
-     * Updates an existing users model.
+     * Updates an existing user model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -96,7 +96,7 @@ class UsersController extends Controller
     }
 
     /**
-     * Deletes an existing users model.
+     * Deletes an existing user model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -110,15 +110,15 @@ class UsersController extends Controller
     }
 
     /**
-     * Finds the users model based on its primary key value.
+     * Finds the user model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return users the loaded model
+     * @return user the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = users::findOne($id)) !== null) {
+        if (($model = user::findOne($id)) !== null) {
             return $model;
         }
 

@@ -5,6 +5,7 @@ namespace app\controllers;
 use app\models\Category;
 use app\models\categorySearch;
 use app\models\News;
+use app\models\SingupForm;
 use Yii;
 use yii\data\Pagination;
 use yii\filters\AccessControl;
@@ -66,7 +67,7 @@ class SiteController extends Controller
     public function actionIndex()
     {
 
-        $query = News::find();
+        $query = News::find()->orderBy(['id' => SORT_DESC]);
         $countQuery = clone $query;
         $pages = new Pagination(['totalCount' => $countQuery->count(), 'pageSize' => 11]);
         $news = $query->offset($pages->offset)
@@ -84,41 +85,6 @@ class SiteController extends Controller
 
         return $this->render('index');
     }
-
-    /**
-     * Login action.
-     *
-     * @return Response|string
-     */
-    public function actionLogin()
-    {
-        if (!Yii::$app->user->isGuest) {
-            return $this->goHome();
-        }
-
-        $model = new LoginForm();
-        if ($model->load(Yii::$app->request->post()) && $model->login()) {
-            return $this->goBack();
-        }
-
-        $model->password = '';
-        return $this->render('login', [
-            'model' => $model,
-        ]);
-    }
-
-    /**
-     * Logout action.
-     *
-     * @return Response
-     */
-    public function actionLogout()
-    {
-        Yii::$app->user->logout();
-
-        return $this->goHome();
-    }
-
     /**
      * Displays contact page.
      *
@@ -157,17 +123,28 @@ class SiteController extends Controller
         ]);
     }
 
-    public function actionCategory()
+    public function actionCategory($id)
     {
-        return $this->render('category');
+
+        $query = News::find()->where(['category_id' => $id])->orderBy(['id' => SORT_DESC]);
+        $countQuery = clone $query;
+        $pages = new Pagination(['totalCount' => $countQuery->count(), 'pageSize' => 11]);
+        $news = $query->offset($pages->offset)
+            ->limit($pages->limit)
+            ->all();
+
+        $categories = Category::find()->all();
+
+
+        return $this->render('category',[
+            'news' => $news,
+            'pages' => $pages,
+            'categories' => $categories,
+        ]);
     }
 
     /**
      * Страница регистрации
      */
-    public function actionRegistration()
-    {
-        return $this->render('registration');
-    }
 
 }

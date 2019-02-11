@@ -8,6 +8,7 @@ use app\widgets\Alert;
 use yii\helpers\Html;
 use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
+use yii\helpers\Url;
 use yii\widgets\Breadcrumbs;
 use app\assets\AppAsset;
 
@@ -32,13 +33,21 @@ PublicAsset::register($this);
 <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
     <h3 class="my-0 mr-md-auto font-weight-normal">News Blog</h3>
     <nav class="my-md-0 my-md-0 mr-md-3">
-        <a class="p-2 text-dark" href="news/web/index">Новости</a>
-        <a class="p-2 text-dark" href="#">Контакты</a>
-        <a class="p-2 text-dark" href="#">О нас</a>
+        <a class="p-2 text-dark btn btn-outline-light" href="<?= Url::toRoute(['/'])?>">Новости</a>
+        <a class="p-2 text-dark btn btn-outline-light" href="#">Контакты</a>
+        <a class="p-2 text-dark btn btn-outline-light" href="#">О нас</a>
     </nav>
-
-    <a class="btn btn-outline-primary mr-1"  href="web/site/login">Войти</a>
-    <a class="btn btn-outline-primary" href="reg.php">Регистрация</a>
+    <?php if (Yii::$app->user->isGuest): ?>
+    <a class="btn btn-outline-success mr-1"  href="<?= Url::toRoute(['auth/login'])?>">Войти</a>
+    <a class="btn btn-outline-primary mr-1" href="<?= Url::toRoute(['auth/singup'])?>">Регистрация</a>
+    <?php else: ?>
+    <?=Html::beginForm(['/auth/logout'], 'post')
+    . Html::submitButton(
+        'Logout (' . Yii::$app->user->identity->nickname . ')',
+        ['class' => 'btn btn-warning']
+    )
+    . Html::endForm() ;?>
+    <?php endif;?>
 </div>
 
 <?= $content ?>
