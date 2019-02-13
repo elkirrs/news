@@ -98,14 +98,14 @@ class News extends \yii\db\ActiveRecord
 
 
 
-//    /**
-//     * @return \yii\db\ActiveQuery
-//     */
-//    public function getCommentsnews()
-//    {
-//        return $this->hasMany(Commentsnews::className(), ['news_id' => 'id']);
-//    }
-//
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getCommentsnews()
+    {
+        return $this->hasMany(Commentsnews::className(), ['news_id' => 'id']);
+    }
+
     /**
      * @return \yii\db\ActiveQuery
      */

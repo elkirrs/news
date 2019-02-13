@@ -38,7 +38,7 @@ AppAsset::register($this);
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-right'],
         'items' => [
-            ['label' => 'admin', 'url' => ['default/index']],
+            ['label' => 'blog', 'url' => ['/']],
             ['label' => 'Пользователи', 'url' => ['user/index']],
             ['label' => 'Новости', 'url' => ['news/index']],
             ['label' => 'Категории', 'url' => ['category/index']],
@@ -46,12 +46,12 @@ AppAsset::register($this);
             ['label' => 'Чат', 'url' => ['chatonline/index']],
             ['label' => 'Выбор', 'url' => ['userselection/index']],
             Yii::$app->user->isGuest ? (
-            ['label' => 'Login', 'url' => ['/site/login']]
+            ['label' => 'Login', 'url' => ['/auth/login']]
             ) : (
                 '<li>'
-                . Html::beginForm(['/site/logout'], 'post')
+                . Html::beginForm(['/auth/logout'], 'post')
                 . Html::submitButton(
-                    'Logout (' . Yii::$app->user->identity->username . ')',
+                    'Logout (' . Yii::$app->user->identity->nickname . ')',
                     ['class' => 'btn btn-link logout']
                 )
                 . Html::endForm()

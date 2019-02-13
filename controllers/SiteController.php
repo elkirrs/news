@@ -4,6 +4,8 @@ namespace app\controllers;
 
 use app\models\Category;
 use app\models\categorySearch;
+use app\models\CommentsForm;
+use app\models\Commentsnews;
 use app\models\News;
 use app\models\SingupForm;
 use Yii;
@@ -82,8 +84,6 @@ class SiteController extends Controller
             'categories' => $categories,
         ]);
 
-
-        return $this->render('index');
     }
     /**
      * Displays contact page.
@@ -117,11 +117,23 @@ class SiteController extends Controller
     public function actionSingle($id)
     {
 
+
         $news = News::findOne($id);
+        $categories = Category::find()->all();
+
+
+        $comments = $news->commentsnews;
+        $commentsForm = new CommentsForm();
+
+
         return $this->render('single',[
             'news' => $news,
+            'categories' => $categories,
+            'comments' => $comments,
+            'commentsForm' => $commentsForm,
         ]);
     }
+
 
     public function actionCategory($id)
     {
@@ -143,8 +155,20 @@ class SiteController extends Controller
         ]);
     }
 
-    /**
-     * Страница регистрации
-     */
+    public function actionComment($id)
+    {
+        $model = new CommentsForm();
+
+        if (Yii::$app->request->isPost)
+        {
+            $model->load(Yii::$app->request->post());
+            if ($model->saveComment($id))
+            {
+                return $this->redirect(['site/single', 'id' => $id]);
+            };
+        }
+    }
+
+
 
 }

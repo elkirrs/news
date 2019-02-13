@@ -1,9 +1,9 @@
 <?php
 
-/* @var $this yii\web\View */
 
 use yii\helpers\Html;
 use yii\helpers\Url;
+use yii\widgets\ActiveForm;
 
 $this->title = 'Новость';
 $this->params['breadcrumbs'][] = $this->title;
@@ -25,46 +25,42 @@ $this->params['breadcrumbs'][] = $this->title;
                         </div>
                     </div>
                 </div><!-- /.blog-post -->
-                <div class="leave-comment"><!--leave comment-->
-                    <h4>Leave a reply</h4>
 
 
-                    <form class="form-horizontal contact-form" role="form" method="post" action="#">
 
-                        <div class="form-group">
-                            <div class="col-md-12">
-										<textarea class="form-control" rows="6" name="message"
-                                                  placeholder="Write Massage"></textarea>
-                            </div>
-                        </div>
-                        <a href="#" class="btn btn-secondary btm-sm">Post Comment</a>
-                    </form>
-                </div><!--end leave comment-->
+
+
+                <div class="bottom-comment"><!--bottom comment-->
+                    <h5>Коментарии: </h5>
+
+                    <?php if (!empty($comments)): ?>
+                    <?php foreach ($comments as $comment): ?>
+                    <div class="alert alert-success" role="alert">
+
+                        <p class="comment-date">
+                            <em><b><?= $comment->user->nickname; ?></b></em>
+                            <?= $comment->dateComments; ?>
+                        </p>
+
+                        <p class="para"><?= $comment->textComments; ?></p>
+                    </div>
+
+                        <?php endforeach; ?>
+                    <?php endif; ?>
+                </div>
+                <!-- end bottom comment-->
+
+
+<?= $this->render('/partials/comment', [
+        'news' => $news,
+        'comments' => $comments,
+        'commentsForm' => $commentsForm,
+]);?>
+
             </div><!-- /.blog-main -->
-
-            <aside class="col-md-4 blog-sidebar">
-                <div class="p-3 mb-3 bg-light rounded">
-                    <h4 class="font-italic">About</h4>
-                    <p class="mb-0">Etiam porta <em>sem malesuada magna</em> mollis euismod. Cras mattis consectetur purus sit amet fermentum. Aenean lacinia bibendum nulla sed consectetur.</p>
-                </div>
-
-                <div class="p-3">
-                    <h4 class="font-italic">Archives</h4>
-                    <ol class="list-unstyled mb-0">
-                        <li><a href="#">March 2014</a></li>
-                        <li><a href="#">February 2014</a></li>
-                        <li><a href="#">January 2014</a></li>
-                        <li><a href="#">December 2013</a></li>
-                        <li><a href="#">November 2013</a></li>
-                        <li><a href="#">October 2013</a></li>
-                        <li><a href="#">September 2013</a></li>
-                        <li><a href="#">August 2013</a></li>
-                        <li><a href="#">July 2013</a></li>
-                        <li><a href="#">June 2013</a></li>
-                        <li><a href="#">May 2013</a></li>
-                        <li><a href="#">April 2013</a></li>
-                    </ol>
-                </div>
+                <?= $this->render('/partials/sidebar',[
+                    'categories' => $categories,
+                ]);?>
             </aside><!-- /.blog-sidebar -->
         </div><!-- /.row -->
     </main><!-- /.container -->

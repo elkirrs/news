@@ -13,6 +13,7 @@ use app\models\LoginForm;
 use app\models\SingupForm;
 use app\models\User;
 use Yii;
+use yii\filters\AccessControl;
 use yii\web\Controller;
 
 class AuthController extends Controller
@@ -48,6 +49,10 @@ class AuthController extends Controller
     }
 
 
+    /**
+     * Регистрация пользователя
+     */
+
     public function actionSingup()
     {
         $model =new SingupForm();
@@ -61,5 +66,6 @@ class AuthController extends Controller
 
         return $this->render('/auth/singup', ['model' => $model]);
     }
+
 
 }

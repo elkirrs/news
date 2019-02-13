@@ -32,10 +32,12 @@ class Commentsnews extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['textComments', 'dateComments', 'news_id', 'users_id'], 'required'],
+            [['textComments', 'news_id'], 'required'],
             [['dateComments'], 'safe'],
+            [['dateComments'], 'date', 'format' => 'php:Y-m-d H:i:s'],
+            [['dateComments'], 'default', 'value' => date('Y-m-d H:i:s')],
             [['news_id', 'users_id'], 'integer'],
-            [['textComments'], 'string', 'max' => 1000],
+            [['textComments'], 'string', 'max' => 500],
             [['news_id'], 'exist', 'skipOnError' => true, 'targetClass' => News::className(), 'targetAttribute' => ['news_id' => 'id']],
             [['users_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['users_id' => 'id']],
         ];
@@ -66,8 +68,13 @@ class Commentsnews extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getUsers()
+    public function getUser()
     {
         return $this->hasOne(User::className(), ['id' => 'users_id']);
+    }
+
+    public function getDate()
+    {
+        return Yii::$app->formatter->asDatetime($this->dateComments);
     }
 }
