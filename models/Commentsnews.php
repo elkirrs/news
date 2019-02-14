@@ -77,4 +77,7 @@ class Commentsnews extends \yii\db\ActiveRecord
     {
         return Yii::$app->formatter->asDatetime($this->dateComments);
     }
+
+
+
 }

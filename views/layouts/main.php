@@ -21,7 +21,7 @@ PublicAsset::register($this);
     <meta charset="<?= Yii::$app->charset ?>">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="icon" href="public/img/fivicon.png">
+    <link rel="icon" href="/news/web/public/img/fivicon.png">
     <?= Html::csrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
@@ -31,22 +31,35 @@ PublicAsset::register($this);
 
 
 <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
-    <h3 class="my-0 mr-md-auto font-weight-normal">News Blog</h3>
+    <h3 class="my-0 mr-md-auto font-weight-normal">
+        <img src="/news/web/public/img/fivicon.png" alt="" width="20%">
+        <em>News </em>Blog</h3>
     <nav class="my-md-0 my-md-0 mr-md-3">
         <a class="p-2 text-dark btn btn-outline-light" href="<?= Url::toRoute(['/'])?>">Новости</a>
-        <a class="p-2 text-dark btn btn-outline-light" href="#">Контакты</a>
+        <a class="p-2 text-dark btn btn-outline-light" href="<?= Url::toRoute(['site/contact'])?>">Контакты</a>
         <a class="p-2 text-dark btn btn-outline-light" href="#">О нас</a>
     </nav>
     <?php if (Yii::$app->user->isGuest): ?>
     <a class="btn btn-outline-success mr-1"  href="<?= Url::toRoute(['auth/login'])?>">Войти</a>
     <a class="btn btn-outline-primary mr-1" href="<?= Url::toRoute(['auth/singup'])?>">Регистрация</a>
     <?php else: ?>
+
+        <?php if (!empty(Yii::$app->user->identity->isAdmin)):?>
+            <a class="btn btn-danger" href="/news/web/admin">Админка</a>
     <?=Html::beginForm(['/auth/logout'], 'post')
     . Html::submitButton(
         'Logout (' . Yii::$app->user->identity->nickname . ')',
         ['class' => 'btn btn-warning']
     )
     . Html::endForm() ;?>
+        <?php else:?>
+            <?=Html::beginForm(['/auth/logout'], 'post')
+            . Html::submitButton(
+                'Logout (' . Yii::$app->user->identity->nickname . ')',
+                ['class' => 'btn btn-warning']
+            )
+            . Html::endForm() ;?>
+        <?php endif;?>
     <?php endif;?>
 </div>
 

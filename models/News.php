@@ -3,6 +3,7 @@
 namespace app\models;
 
 use Yii;
+use yii\data\Pagination;
 
 /**
  * This is the model class for table "news".
@@ -113,4 +114,27 @@ class News extends \yii\db\ActiveRecord
     {
         return $this->hasOne(Category::className(), ['id' => 'category_id']);
     }
+
+    public function getDate()
+    {
+        return Yii::$app->formatter->asDate($this->dateNews);
+    }
+
+    public static function getAll($pageSize = 15)
+    {
+
+        $query = News::find()->orderBy(['id' => SORT_DESC]);
+        $count = $query->count();
+        $pages = new Pagination(['totalCount' => $count, 'pageSize' => $pageSize]);
+        $news = $query->offset($pages->offset)
+            ->limit($pages->limit)
+            ->all();
+
+        $data['news'] = $news;
+        $data['pages'] = $pages;
+
+
+        return $data;
+    }
+
 }

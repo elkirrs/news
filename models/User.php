@@ -114,7 +114,7 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
      */
     public static function findIdentityByAccessToken($token, $type = null)
     {
-        // TODO: Implement findIdentityByAccessToken() method.
+
     }
 
     /**
@@ -140,7 +140,7 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
      */
     public function getAuthKey()
     {
-        // TODO: Implement getAuthKey() method.
+
     }
 
     /**
@@ -153,7 +153,7 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
      */
     public function validateAuthKey($authKey)
     {
-        // TODO: Implement validateAuthKey() method.
+
     }
 
     public static function findByEmail($email)
@@ -161,9 +161,16 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
         return User::find()->where(['email' => $email])->one();
     }
 
+    public function setPassword($password)
+    {
+        $this->password = Yii::$app->security->generatePasswordHash($password, 11);
+    }
+
+
     public function validatePassword($password)
     {
-        return ($this->password == $password) ? true : false;
+        return Yii::$app->security->validatePassword($password, $this->password) ? true : false;
+                //return ($this->password === $password) ? true : false;
     }
 
     public function create()

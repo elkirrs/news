@@ -4,8 +4,7 @@ namespace app\controllers;
 
 use app\models\Category;
 use app\models\categorySearch;
-use app\models\CommentsForm;
-use app\models\Commentsnews;
+use app\models\CommentForm;
 use app\models\News;
 use app\models\SingupForm;
 use Yii;
@@ -68,19 +67,13 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
+        $data = News::getAll(11);
+        $categories = Category::getAll();
 
-        $query = News::find()->orderBy(['id' => SORT_DESC]);
-        $countQuery = clone $query;
-        $pages = new Pagination(['totalCount' => $countQuery->count(), 'pageSize' => 11]);
-        $news = $query->offset($pages->offset)
-            ->limit($pages->limit)
-            ->all();
-
-        $categories = Category::find()->all();
 
         return $this->render('index', [
-            'news' => $news,
-            'pages' => $pages,
+            'news' => $data['news'],
+            'pages' => $data['pages'],
             'categories' => $categories,
         ]);
 
@@ -114,59 +107,48 @@ class SiteController extends Controller
     }
 
 
-    public function actionSingle($id)
+    public function actionView($id)
     {
-
-
         $news = News::findOne($id);
-        $categories = Category::find()->all();
-
-
-        $comments = $news->commentsnews;
-        $commentsForm = new CommentsForm();
+        $categories = Category::getAll();
+        $commentsnews = $news->commentsnews;
+        $commentForm = new CommentForm();
 
 
         return $this->render('single',[
             'news' => $news,
             'categories' => $categories,
-            'comments' => $comments,
-            'commentsForm' => $commentsForm,
+            'commentsnews' => $commentsnews,
+            'commentForm' => $commentForm,
         ]);
     }
 
 
     public function actionCategory($id)
     {
-
-        $query = News::find()->where(['category_id' => $id])->orderBy(['id' => SORT_DESC]);
-        $countQuery = clone $query;
-        $pages = new Pagination(['totalCount' => $countQuery->count(), 'pageSize' => 11]);
-        $news = $query->offset($pages->offset)
-            ->limit($pages->limit)
-            ->all();
-
-        $categories = Category::find()->all();
+        $data = Category::getNewsByCategory($id);
+        $categories = Category::getAll();
 
 
         return $this->render('category',[
-            'news' => $news,
-            'pages' => $pages,
+            'news' => $data['news'],
+            'pages' => $data['pages'],
             'categories' => $categories,
         ]);
     }
 
     public function actionComment($id)
     {
-        $model = new CommentsForm();
+        $model = new CommentForm();
 
-        if (Yii::$app->request->isPost)
-        {
-            $model->load(Yii::$app->request->post());
+
+        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
             if ($model->saveComment($id))
             {
-                return $this->redirect(['site/single', 'id' => $id]);
+                return $this->redirect(['site/view', 'id' => $id]);
             };
         }
+
     }
 
 

@@ -21,11 +21,11 @@ $this->title = 'News Blog';
                                 <div class="card-body d-flex flex-column align-items-start">
                                     <strong class="d-inline-block mb-2 text-primary"><?= $new->category->nameCategory;?></strong>
                                     <h5 class="mb-1">
-                                        <a class="text-dark" href="<?= Url::toRoute(['site/single', 'id' => $new->id]);?>"><?= $new->nameNews;?></a>
+                                        <a class="text-dark" href="<?= Url::toRoute(['site/view', 'id' => $new->id]);?>"><?= $new->nameNews;?></a>
                                     </h5>
-                                    <div class="mb-1 text-muted"><?= $new->dateNews ?></div>
+                                    <div class="mb-1 text-muted"><?= $new->getDate(); ?></div>
                                     <p class="card-text mb-auto"><?= $new->annotatio;?></p>
-                                    <a href="<?= Url::toRoute(['site/single', 'id' => $new->id]);?>">Подробнее</a>
+                                    <a href="<?= Url::toRoute(['site/view', 'id' => $new->id]);?>">Подробнее</a>
                                 </div>
 
                             </div>

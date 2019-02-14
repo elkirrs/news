@@ -18,7 +18,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         <div class="card flex-md-row mb-3 shadow-sm h-md-250">
                             <div class="card-body d-flex flex-column align-items-start">
                                 <h5 class="card-title"><?= $news->nameNews;?></h5>
-                                <img src=" <?= $news->getImage();?>"  width="100%" height="100%" alt="">
+                                <img src=" <?= $news->getImage();?>"  width="100%">
                                 <p class="card-text"><?= $news->contentNews;?></p>
                                 <a href="<?= Url::toRoute(['/']);?>" class="btn btn-primary btn-sm">Вернуться назад</a>
                             </div>
@@ -33,16 +33,16 @@ $this->params['breadcrumbs'][] = $this->title;
                 <div class="bottom-comment"><!--bottom comment-->
                     <h5>Коментарии: </h5>
 
-                    <?php if (!empty($comments)): ?>
-                    <?php foreach ($comments as $comment): ?>
+                    <?php if (!empty($commentsnews)): ?>
+                    <?php foreach ($commentsnews as $commentnews): ?>
                     <div class="alert alert-success" role="alert">
 
                         <p class="comment-date">
-                            <em><b><?= $comment->user->nickname; ?></b></em>
-                            <?= $comment->dateComments; ?>
+                            <em><b><?= $commentnews->user->nickname; ?></b></em>
+                            <?= $commentnews->getDate(); ?>
                         </p>
 
-                        <p class="para"><?= $comment->textComments; ?></p>
+                        <p class="para"><?= $commentnews->textComments; ?></p>
                     </div>
 
                         <?php endforeach; ?>
@@ -51,10 +51,11 @@ $this->params['breadcrumbs'][] = $this->title;
                 <!-- end bottom comment-->
 
 
+
 <?= $this->render('/partials/comment', [
         'news' => $news,
-        'comments' => $comments,
-        'commentsForm' => $commentsForm,
+        'commentsnews' => $commentsnews,
+        'commentForm' => $commentForm,
 ]);?>
 
             </div><!-- /.blog-main -->

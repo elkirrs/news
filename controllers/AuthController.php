@@ -55,9 +55,10 @@ class AuthController extends Controller
 
     public function actionSingup()
     {
-        $model =new SingupForm();
+        $model = new SingupForm();
 
-        if (Yii::$app->request->isPost){
+
+        if (Yii::$app->request->isPost ){
             $model->load(Yii::$app->request->post());
             if ($model->singup()){
                 return $this->redirect('login');

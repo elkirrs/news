@@ -14,7 +14,7 @@
             <?php foreach ($categories as $category):?>
                 <li>
                     <a href="<?= Url::toRoute(['site/category', 'id' => $category->id]);?>"><?=$category->nameCategory ;?></a>
-                    <span class="post-count pull-right"> (<?= $category->getNews()->count();?>)</span>
+                    <span class="post-count pull-right"> (<?= $category->getNewsCount();?>)</span>
                 </li>
             <?php endforeach; ?>
 

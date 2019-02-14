@@ -1,6 +1,7 @@
 <?php
 use yii\widgets\LinkPager;
 use yii\helpers\Url;
+$this->title = 'Категории';
 ?>
 
 <div class="container">
@@ -14,11 +15,11 @@ use yii\helpers\Url;
                                 <div class="card-body d-flex flex-column align-items-start">
                                     <strong class="d-inline-block mb-2 text-primary"><?= $new->category->nameCategory;?></strong>
                                     <h4 class="mb-0">
-                                        <a class="text-dark" href="<?= Url::toRoute(['site/single', 'id' => $new->id]);?>"><?= $new->nameNews;?></a>
+                                        <a class="text-dark" href="<?= Url::toRoute(['site/view', 'id' => $new->id]);?>"><?= $new->nameNews;?></a>
                                     </h4>
                                     <p class="card-text mb-auto"><?= $new->annotatio;?></p>
                                     <div class="mb-1 text-muted"><?= $new->dateNews ?></div>
-                                    <a href="<?= Url::toRoute(['site/single', 'id' => $new->id]);?>">Подробнее</a>
+                                    <a href="<?= Url::toRoute(['site/view', 'id' => $new->id]);?>">Подробнее</a>
                                 </div>
                                 <img src=" <?= $new->getImage();?>"  width="290" height="250" alt="">
                                 </div>

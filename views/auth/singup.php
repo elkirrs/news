@@ -4,6 +4,7 @@
 /* @var $form yii\bootstrap\ActiveForm */
 /* @var $model app\models\LoginForm */
 
+use yii\captcha\Captcha;
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
 
@@ -29,11 +30,10 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <?= $form->field($model, 'surname')->textInput(['autofocus' => true]) ?>
 
-    <?= $form->field($model, 'middlename')->textInput(['autofocus' => true]) ?>
-
     <?= $form->field($model, 'nickname')->textInput(['autofocus' => true]) ?>
 
     <?= $form->field($model, 'email')->textInput(['autofocus' => true]) ?>
+
 
     <?= $form->field($model, 'password')->passwordInput() ?>
 
